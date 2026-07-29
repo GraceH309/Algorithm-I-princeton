@@ -1,33 +1,38 @@
-# Algorithm-I-princeton
+# Princeton Algorithms, Part I — assignment notes
 
-My personal coursework from **Princeton University's "Algorithms, Part I"** (Robert Sedgewick & Kevin Wayne, Coursera). All programming assignments were completed and verified by the course's automated grader. This repository is a study/portfolio record of that work — not official course material.
+Took Robert Sedgewick's Coursera course, finished in 2025. The autograder passed
+everything, but a couple of assignments took several rewrites. This repo is my
+own study record after finishing, not the official solutions.
 
-## What this demonstrates (CS competencies)
+## Assignments
 
-| Assignment | File(s) | CS competency demonstrated |
-|---|---|---|
-| Percolation | `Percolation.java`, `PercolationStats.java` | Union–Find (weighted quick-union + path compression); backwash handling with dual UF structures; Monte-Carlo simulation |
-| Deques & Randomized Queues | `Deque.java`, `RandomizedQueue.java`, `Permutation.java` | Generic data types; doubly-linked list; custom `Iterator` implementation; array shuffling |
-| Collinear Points | `Point.java`, `BruteCollinearPoints.java`, `FastCollinearPoints.java` | Sorting, comparators, algorithm analysis (brute-force vs. sorting-based fast method) |
-| 8-Puzzle | `Board.java`, `Solver.java` | Priority queues (A* search), Manhattan-distance heuristic, immutable ADT design, unsolvability detection via twin boards |
-| KdTree | `PointSET.java`, `KdTree.java` | 2D-tree / geometric search, range search with rectangle pruning, nearest-neighbor search |
+| Assignment | Difficulty | What bit me |
+|------------|-----------|-------------|
+| Percolation | ⭐⭐⭐ | backwash problem stuck me for two days; dual UF only clicked after reading the discussion board |
+| Deques & Randomized Queues | ⭐⭐ | Iterator didn't handle fail-fast at first, tests failed |
+| Collinear Points | ⭐⭐⭐⭐ | Fast version's sorting idea took a whole evening; wrote brute force first as a safety net |
+| 8-Puzzle | ⭐⭐⭐⭐⭐ | Tried both Manhattan and Hamming; Manhattan much faster; unsolvable check via twin board is the standard trick |
+| KdTree | ⭐⭐⭐⭐ | range search rectangle pruning easy to get the boundary condition wrong |
 
-The numbered files (`2-1-1.java`, `10-2.java`, etc.) are the course's **weekly exercises** (not graded assignments) and are included as additional practice.
+(numbered files like `2-1-1.java`, `10-2.java` are weekly exercises, not graded — kept as extra practice.)
 
-## Build & run
+## Build
 
-These programs depend on Princeton's `algs4.jar` standard library.
+Depends on Princeton's `algs4.jar`:
 
-1. Download `algs4.jar` from: https://algs4.cs.princeton.edu/code/
-2. Compile (example):
-   ```bash
-   javac -cp ".:algs4.jar" Percolation.java
-   java  -cp ".:algs4.jar" Percolation
-   ```
-3. Replace `.` with `;` on Windows: `javac -cp ".;algs4.jar" Percolation.java`
+```bash
+javac -cp ".:algs4.jar" Percolation.java
+java  -cp ".:algs4.jar" Percolation
+```
 
-## Note on academic integrity
+On Windows swap `.` for `;`: `-cp ".;algs4.jar"`.
 
-This repository contains my own solutions to publicly available course assignments, kept here as a personal learning record after course completion. It is shared for portfolio purposes only.
+## Gotchas I remember
 
+- **Percolation backwash**: with a single UF (virtual top + bottom), once the system percolates, bottom-connected open sites get wrongly flagged as "full". Fix is two UFs (one with bottom, one without); details in `notes/percolation-backwash.md`. Took me two days to see it; got it from the discussion board.
+- **8-Puzzle unsolvable**: twin-board trick for detecting unsolvable is way easier than guessing.
+- **KdTree pruning**: in range/nearest, got the `>=` / `>` boundary wrong several times.
 
+## Note
+
+These are my **own** solutions, uploaded after I finished. For reference only — don't copy them (and don't submit them as your own, that breaks the honor code).
