@@ -1,38 +1,42 @@
-# Princeton Algorithms, Part I — assignment notes
+# Princeton Algorithms, Part I — notes
 
-Took Robert Sedgewick's Coursera course, finished in 2025. The autograder passed
-everything, but a couple of assignments took several rewrites. This repo is my
-own study record after finishing, not the official solutions.
+Finished Robert Sedgewick's Coursera course in 2025. Autograder passed everything.
+I'm keeping the code here mostly so future-me can find it again.
 
 ## Assignments
 
-| Assignment | Difficulty | What bit me |
-|------------|-----------|-------------|
-| Percolation | ⭐⭐⭐ | backwash problem stuck me for two days; dual UF only clicked after reading the discussion board |
-| Deques & Randomized Queues | ⭐⭐ | Iterator didn't handle fail-fast at first, tests failed |
-| Collinear Points | ⭐⭐⭐⭐ | Fast version's sorting idea took a whole evening; wrote brute force first as a safety net |
-| 8-Puzzle | ⭐⭐⭐⭐⭐ | Tried both Manhattan and Hamming; Manhattan much faster; unsolvable check via twin board is the standard trick |
-| KdTree | ⭐⭐⭐⭐ | range search rectangle pruning easy to get the boundary condition wrong |
+- **Percolation** — the backwash bug ate a lot of time. Fix was two UFs (one with
+  the virtual bottom, one without); I only really got it after reading the discussion
+  board. Details scribbled in `notes/percolation-backwash.md`.
+- **Deques & Randomized Queues** — fine, passed first try, nothing to say here.
+- **Collinear Points** — brute force first (slow but obviously right), then the fast
+  version. The sort + dedup step took a whole evening.
+- **8-Puzzle** — Manhattan distance beats Hamming easily; the twin-board trick for
+  the unsolvable case is the one thing I'm glad I didn't have to invent myself.
+- **KdTree** — `range()` and `nearest()` work, but I kept flipping `>=` / `>` on the
+  rectangle pruning and failing the hidden tests a couple of times.
 
-(numbered files like `2-1-1.java`, `10-2.java` are weekly exercises, not graded — kept as extra practice.)
+(the `2-1-1.java`, `10-2.java` style files are just weekly exercises, not graded)
 
 ## Build
 
-Depends on Princeton's `algs4.jar`:
+Needs Princeton's `algs4.jar` on the classpath:
 
-```bash
-javac -cp ".:algs4.jar" Percolation.java
-java  -cp ".:algs4.jar" Percolation
-```
+    javac -cp ".:algs4.jar" Percolation.java
+    java  -cp ".:algs4.jar" Percolation
 
-On Windows swap `.` for `;`: `-cp ".;algs4.jar"`.
+On Windows the separator is `;` not `:`, so `-cp ".;algs4.jar"`. Cost me half an
+hour of "class not found" errors before I noticed.
 
-## Gotchas I remember
+## TODO / didn't finish
 
-- **Percolation backwash**: with a single UF (virtual top + bottom), once the system percolates, bottom-connected open sites get wrongly flagged as "full". Fix is two UFs (one with bottom, one without); details in `notes/percolation-backwash.md`. Took me two days to see it; got it from the discussion board.
-- **8-Puzzle unsolvable**: twin-board trick for detecting unsolvable is way easier than guessing.
-- **KdTree pruning**: in range/nearest, got the `>=` / `>` boundary wrong several times.
+- KdTree: want to extend `nearest()` into k-NN, but haven't figured out the pruning
+  yet. Left as is for now.
+- The course had a few optional exercises I started and dropped — never wrote a fast
+  Boggle solver, the brute-force one is all I've got.
+- 8-Puzzle A* works, but I skipped the "game-tree" bonus they mentioned.
 
 ## Note
 
-These are my **own** solutions, uploaded after I finished. For reference only — don't copy them (and don't submit them as your own, that breaks the honor code).
+My own solutions, posted after I finished. Reference only — don't copy, and don't
+submit as yours (honor code).
