@@ -1,5 +1,7 @@
 # Princeton Algorithms, Part I — notes
 
+Note: The large volume of early commits stems from migrating offline notes to this repository. I will keep making incremental improvements over time
+
 Finished Robert Sedgewick's Coursera course in 2025. Autograder passed everything.
 I'm keeping the code here mostly so future-me can find it again.
 
